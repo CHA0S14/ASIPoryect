@@ -35,6 +35,12 @@ function tratarComando {
 	#####################################################
 }
 
+#Comprobamos que existe el fichero de configuracion
+if [ ! -f $1 ]
+then
+	echo "No existe el fichero $1"
+	exit 1
+fi
 #Obtenemos las lineas que no sean blancos o comentarios
 #Source http://es.ccm.net/faq/2136-bash-mostrar-un-archivo-sin-lineas-de-comentarios
 comands=`grep -E -v '^(#|$)' $1`
@@ -45,7 +51,7 @@ linea=1
 for comand in $comands; do
 	#Hacemos que el espacio separe las variables
 	IFS=$' '
-	tratarComando $linea $comand
+	tratarComando $linea 
 	let linea+=1
 done
 
