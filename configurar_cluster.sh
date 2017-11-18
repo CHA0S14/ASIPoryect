@@ -47,18 +47,18 @@ function tratarComando {
 	echo "Fichero de perfil de configuración: $1"
 	echo 'Preparando archivos...'
 	#Creamos la carpeta del proyecto
-	ssh root@$2 'mkdir ~/ASI2014/' > /dev/null 2>&1 || { 
+	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 'mkdir ~/ASI2014/' > /dev/null 2>&1 || { 
 		echo "No es posible establecer conexion con la máquina. Abortando..."
 		exit 1
 		}
 	#Copiamos los archivos necesarios
-	scp $4 root@$2:~/ASI2014/$4 > /dev/null 2>&1
-	scp $SCRIPT root@$2:~/ASI2014/$SCRIPT > /dev/null 2>&1
+	scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null $4 root@$2:~/ASI2014/config.cfg > /dev/null 2>&1
+	scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null $SCRIPT root@$2:~/ASI2014/servicio > /dev/null 2>&1
 	#Ejecutamos el servicio
-	ssh root@$2 "chmod +x ~/ASI2014/$SCRIPT" > /dev/null 2>&1
-	ssh root@$2 "~/ASI2014/$SCRIPT ~/ASI2014/$4" 2>&1
+	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 "chmod +x ~/ASI2014/servicio" > /dev/null 2>&1
+	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 "~/ASI2014/servicio ~/ASI2014/config.cfg" 2>&1
 	#Eliminamos los ficheros de configuración temporales utilizados
-	ssh root@$2 'rm -r ~/ASI2014/' > /dev/null 2>&1
+	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 'rm -r ~/ASI2014/' > /dev/null 2>&1
 }
 
 #Comprobamos que existe el fichero de configuracion
@@ -68,7 +68,6 @@ then
 	exit 1
 fi
 #Obtenemos las lineas que no sean blancos o comentarios
-#Source http://es.ccm.net/faq/2136-bash-mostrar-un-archivo-sin-lineas-de-comentarios
 comands=`grep -E -v '^(#|$)' $1`
 #Con esto hacemos que en el siguiente for la linea divisoria entre el valor de comand 
 #en cada vuelta sea el salto de linea

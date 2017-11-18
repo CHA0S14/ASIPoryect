@@ -33,8 +33,19 @@ for comand in `cat $1`; do
     fi
     let linea+=1
 done
+IFS=' '
+read -a NUM_DISP <<< "$DISPOSITIVOS"
+echo $DISPOSITIVOS
 IFS=$IFS_antiguo
 
 #Instalo la herramienta mdadm
-echo "Preparando el RAID $NOMBRE con nivel $NIVEL"
+echo "Preparando el RAID $DESTINO con nivel $NIVEL"
 echo "Instalando mdadm..."
+#Instalamos mdadm sin que necesite input de parte del usuario
+export DEBIAN_FRONTEND=noninteractive
+apt-get -y install mdadm --no-install-recommends > /dev/null 2>&1 && echo "mdadm instalado" 
+#Creamos el raid finalmente
+#Montar el RAID y guardar la configuración
+echo "Creando raid..."
+#Como daba algun tipo de error de formato en la peticion he tenido que hacer el echo y pasarle la salida a mdadm
+echo "--create $DESTINO -R --name=$DESTINO --level=$NIVEL --metadata=0.90 --raid-devices=${#NUM_DISP[*]} $DISPOSITIVOS" > mdadm > /dev/null  && echo "RAID creado" || echo "Fallo al crear el RAID"
