@@ -51,7 +51,7 @@ linea=1
 for comand in $comands; do
 	#Hacemos que el espacio separe las variables
 	IFS=$' '
-	tratarComando $linea 
+	tratarComando $linea $comand
 	let linea+=1
 done
 
