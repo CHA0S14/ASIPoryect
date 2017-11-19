@@ -47,4 +47,4 @@ apt-get -y install mdadm --no-install-recommends > /dev/null 2>&1 && echo "mdadm
 #Montar el RAID y guardar la configuración
 echo "Creando raid..."
 #Como daba algun tipo de error de formato en la peticion he tenido que hacer el echo y pasarle la salida a mdadm
-mdadm --create $DESTINO -R --name=$DESTINO --level=$NIVEL --metadata=0.90 --raid-devices=${#NUM_DISP[*]} $DISPOSITIVOS > /dev/null 2>&1 && echo "RAID creado" || echo "Fallo al crear el RAID"
+mdadm --create $DESTINO -R --name=$DESTINO --level=$NIVEL --metadata=0.90 --raid-devices=${#NUM_DISP[*]} $DISPOSITIVOS > /dev/null && echo "RAID creado" || echo "Fallo al crear el RAID"
