@@ -8,7 +8,7 @@ then
 fi
 
 #Comprobacion de que estan todos los ficheros
-scripts="montaje.sh raid.sh lvm.sh snis.sh cnis.sh snfs.sh cnfs.sh backup.sh"
+scripts="mount.sh raid.sh lvm.sh snis.sh cnis.sh snfs.sh cnfs.sh backup.sh"
 
 for fich in $scripts; do
 	if [ ! -f "./Servicios/$fich" ]
