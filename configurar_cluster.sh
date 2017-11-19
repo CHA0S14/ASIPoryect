@@ -37,7 +37,7 @@ function tratarComando {
 	case $3 in
 	"mount" )
 		SCRIPT="./Servicios/mount.sh"
-			;;
+		;;
 	"raid" )
 		SCRIPT="./Servicios/raid.sh"
 		;;
