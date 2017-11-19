@@ -35,6 +35,9 @@ function tratarComando {
 	#####################################################
 	echo "Comienzo de la configuracion de $4 con el servicio $3 en la maquina '$2'"
 	case $3 in
+	"mount" )
+		SCRIPT="./Servicios/mount.sh"
+			;;
 	"raid" )
 		SCRIPT="./Servicios/raid.sh"
 		;;
