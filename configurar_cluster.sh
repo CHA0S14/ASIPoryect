@@ -13,7 +13,7 @@ scripts="mount.sh raid.sh lvm.sh snis.sh cnis.sh snfs.sh cnfs.sh backup.sh"
 for fich in $scripts; do
 	if [ ! -f "./Servicios/$fich" ]
 	then
-		echo "El fichero ./conf/$fich no esta disponible. Abortando ejecución."
+		echo "CLUSTER: El fichero ./conf/$fich no esta disponible. Abortando ejecución."
 		exit 1
 	fi
 done
@@ -22,7 +22,7 @@ function tratarComando {
 	#Comprobacion argumentos correctos
 	if [ $# -ne 4 ]
 	then
-		echo "Error en el mandato de la linea $1"
+		echo "CLUSTER: Error en el mandato de la linea $1"
 		exit 1
 	fi
 
@@ -33,7 +33,7 @@ function tratarComando {
 	#		$3 servicio a configurar					#
 	#		$4 fichero de configuracion del servicio	#
 	#####################################################
-	echo "Comienzo de la configuracion de $4 con el servicio $3 en la maquina '$2'"
+	echo "CLUSTER: Comienzo de la configuracion de $4 con el servicio $3 en la maquina '$2'"
 	case $3 in
 	"mount" )
 		SCRIPT="./Servicios/mount.sh"
@@ -42,16 +42,16 @@ function tratarComando {
 		SCRIPT="./Servicios/raid.sh"
 		;;
 	*)
-		echo "Error en el servicio indicado ($SERVICIO). Abortando..."
+		echo "CLUSTER: Error en el servicio indicado ($SERVICIO). Abortando..."
 		exit 1
 		;;
 	esac
 
-	echo "Fichero de perfil de configuración: $1"
-	echo 'Preparando archivos...'
+	echo "CLUSTER: Fichero de perfil de configuración: $1"
+	echo 'CLUSTER: Preparando archivos...'
 	#Creamos la carpeta del proyecto
 	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 'mkdir ~/ASI2014/' > /dev/null 2>&1 || { 
-		echo "No es posible establecer conexion con la máquina. Abortando..."
+		echo "CLUSTER: No es posible establecer conexion con la máquina. Abortando..."
 		exit 1
 		}
 	#Copiamos los archivos necesarios
@@ -67,7 +67,7 @@ function tratarComando {
 #Comprobamos que existe el fichero de configuracion
 if [ ! -f $1 ]
 then
-	echo "No existe el fichero $1"
+	echo "CLUSTER: No existe el fichero $1"
 	exit 1
 fi
 #Obtenemos las lineas que no sean blancos o comentarios
