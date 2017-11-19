@@ -41,6 +41,9 @@ function tratarComando {
 	"raid" )
 		SCRIPT="./Servicios/raid.sh"
 		;;
+	"lvm" )
+		SCRIPT="./Servicios/lvm.sh"
+		;;
 	*)
 		echo "CLUSTER: Error en el servicio indicado ($SERVICIO). Abortando..."
 		exit 1
