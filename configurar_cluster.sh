@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#Scrip Configuracion_cluster
 #Comprobacion argumentos correctos
 if [ $# -ne 1 ]
 then
