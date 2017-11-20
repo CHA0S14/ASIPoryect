@@ -20,12 +20,12 @@ fi
 echo '###### BACKUP ######'
 oldIFS = $IFS
 IFS = $'\n'
-point = 0
-for argument in $(cat $); do
+linea= 0
+for comand in $(cat $); do
 	if [ $point = 0]; then
-		DIR = $argument
+		DIR = $comand
 	fi
-	let point+=1
+	let linea+=1
 done
 echo 'BACKUP: Creando directorio de backup en $DIR'
 echo '#### FIN BACKUP ####'

@@ -41,6 +41,12 @@ function tratarComando {
 	"raid" )
 		SCRIPT="./Servicios/raid.sh"
 		;;
+	"backup_server" )
+		SCRIPT=backup_server.sh
+		;;
+	"backup_client" )
+		SCRIPT=backup_client.sh
+		;;
 	*)
 		echo "CLUSTER: Error en el servicio indicado ($SERVICIO). Abortando..."
 		exit 1
