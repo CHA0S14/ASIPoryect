@@ -21,17 +21,30 @@ echo "-------------------------------------"
 #Extraemos los datos necesarios para configurar el montaje
 linea=0
 for comand in $(cat $1); do
-	if [ $linea = 0 ] 
+	if [ $linea = 0 ]
 	then
 		#Nombre Dispositivo
 		NOMBRE_DEL_DISPOSITIVO=$comand
-	elif [ $linea = 1 ] 
+	elif [ $linea = 1 ]
 	then
 		#Punto de Montaje
 		PUNTO_DE_MONTAJE=$comand
 	fi
 	let linea+=1
 done
+
+if [ -z "$NOMBRE_DEL_DISPOSITIVO" ]
+then
+    echo "MOUNT: Error! Falta uno de los parametros"
+    exit 1
+fi
+
+if [ -z "$PUNTO_DE_MONTAJE" ]
+then
+    echo "MOUNT: Error! Falta uno de los parametros"
+    exit 1
+fi
+
 
 #Comprobamos si el dispositivo ya esta montado
 #Si no esta montado, lo montamos
