@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #Comprobacion argumentos correctos
 if [ $# -ne 1 ]
 then
@@ -5,7 +7,7 @@ then
 	exit 1
 fi
 
-#Comprobacion de que el fichero de configuracion de $2 existe
+#Comprobacion de que el fichero de configuracion de $1 existe
 if [ ! -f $1 ]
 then
     echo "RAID: El fichero $1 no esta disponible. Abortando ejecución."
@@ -31,10 +33,15 @@ for comand in `cat $1`; do
         #Dispositivos
 		DISPOSITIVOS=$comand
     fi
+    else
+		echo "RAID: Error en el formato del fichero de configuracion del servicio"
+		exit 1
+	fi
     let linea+=1
 done
 IFS=' '
 read -a NUM_DISP <<< "$DISPOSITIVOS"
+
 IFS=$IFS_antiguo
 
 #Instalo la herramienta mdadm
