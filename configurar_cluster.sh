@@ -46,6 +46,7 @@ function tratarComando {
 		;;
 	"backup_client" )
 		SCRIPT="./Servicios/backup_client.sh"
+		;;
 	"lvm" )
 		SCRIPT="./Servicios/lvm.sh"
 		;;
