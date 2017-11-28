@@ -8,7 +8,7 @@ then
 fi
 
 #Comprobacion de que estan todos los ficheros
-scripts="mount.sh raid.sh lvm.sh snis.sh cnis.sh snfs.sh cnfs.sh backup.sh"
+scripts="mount.sh raid.sh lvm.sh snis.sh cnis.sh snfs.sh cnfs.sh backup_client.sh backup_server.sh"
 
 for fich in $scripts; do
 	if [ ! -f "./Servicios/$fich" ]
@@ -49,6 +49,9 @@ function tratarComando {
 		;;
 	"lvm" )
 		SCRIPT="./Servicios/lvm.sh"
+		;;
+	"nfs_server" )
+		SCRIPT="./Servicios/snfs.sh"
 		;;
 	*)
 		echo "CLUSTER: Error en el servicio indicado ($SERVICIO). Abortando..."
