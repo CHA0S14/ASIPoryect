@@ -53,6 +53,9 @@ function tratarComando {
 	"nfs_server" )
 		SCRIPT="./Servicios/snfs.sh"
 		;;
+	"nfs_client" )
+		SCRIPT="./Servicios/cnfs.sh"
+		;;
 	*)
 		echo "CLUSTER: Error en el servicio indicado ($SERVICIO). Abortando..."
 		exit 1

@@ -31,6 +31,7 @@ then
 fi
 IFS=$oldIFS
 
+
 #Instalamos los paquetes necesarios
 apt-get -y update > /dev/null && echo "SNFS: Ejecutamos el update de apt-get"
 #Evitamos que pidan cosas por la linea de comando
@@ -39,6 +40,8 @@ echo "SNFS: Instalando nfs-common"
 apt-get -y install nfs-common --no-install-recommends > /dev/null
 echo "SNFS: Instalando nfs-kernel-server"
 apt-get -y install nfs-kernel-server --no-install-recommends > /dev/null
+
+
 echo "SNFS: Configurar servidor nfs"
 #salida del programa 0 si va bien 1 si va mal
 for DIRECTORIO in ${DIRECTORIOS[*]}
