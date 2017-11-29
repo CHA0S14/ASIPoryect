@@ -62,7 +62,7 @@ function tratarComando {
 		;;
 	esac
 
-	echo "CLUSTER: Fichero de perfil de configuración: $1"
+	echo "CLUSTER: Fichero de perfil de configuración: $4"
 	echo 'CLUSTER: Preparando archivos...'
 	#Creamos la carpeta del proyecto
 	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 'mkdir ~/ASI2014/' > /dev/null 2>&1 || { 
