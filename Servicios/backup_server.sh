@@ -18,17 +18,18 @@ then
 fi
 
 echo '###### BACKUP ######'
-oldIFS = $IFS
-IFS = $'\n'
-linea= 0
-for comand in $(cat $); do
-	if [ $point = 0]; then
-		DIR = $comand
+oldIFS=$IFS
+IFS=$'\n'
+linea=0
+for comand in `cat $1`; do
+	if [ $point -eq 0]; then
+		DIR=$comand
 	fi
 	let linea+=1
 done
-echo 'BACKUP: Creando directorio de backup en $DIR'
-echo '#### FIN BACKUP ####'
-IFS = $oldIFS
+
+IFS=$oldIFS
 # Se crea directorio para backup
+echo 'BACKUP: Creando directorio de backup en $DIR'
 mkdir -p $DIR
+echo '#### FIN BACKUP ####'
