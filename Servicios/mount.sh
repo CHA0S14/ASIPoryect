@@ -1,6 +1,7 @@
 #!/bin/bash
 #Fichero de montaje
 
+echo "MOUNT: Iniciando Montaje..."
 #Comprobacion argumentos correctos
 if [ $# -ne 1 ]
 then
@@ -15,9 +16,6 @@ then
     exit 1
 fi
 
-echo "-------------------------------------"
-echo "########## INICIO DE MOUNT ##########"
-echo "-------------------------------------"
 #Extraemos los datos necesarios para configurar el montaje
 linea=0
 for comand in $(cat $1); do
@@ -36,12 +34,14 @@ done
 if [ -z "$NOMBRE_DEL_DISPOSITIVO" ]
 then
     echo "MOUNT: Error! Falta uno de los parametros"
+	echo "MOUNT: Montaje finalizado con error"
     exit 1
 fi
 
 if [ -z "$PUNTO_DE_MONTAJE" ]
 then
     echo "MOUNT: Error! Falta uno de los parametros"
+	echo "MOUNT: Montaje Finalizado con error"
     exit 1
 fi
 
@@ -54,6 +54,3 @@ montaje="$NOMBRE_DEL_DISPOSITIVO     $PUNTO_DE_MONTAJE   auto    auto    0   0";
 
 grep -q "$NOMBRE_DEL_DISPOSITIVO" /etc/fstab && echo "MOUNT: El dispositivo $NOMBRE_DEL_DISPOSITIVO ya esta en fstab" || (echo "$montaje" >> /etc/fstab && echo "MOUNT: Configuración del montaje de $NOMBRE_DEL_DISPOSITIVO completada") || echo "MOUNT: Error al montar el dispositivo $NOMBRE_DEL_DISPOSITIVO"
 mount -a > /dev/null
-echo "----------------------------------"
-echo "########## FIN DE MOUNT ##########"
-echo "----------------------------------"
