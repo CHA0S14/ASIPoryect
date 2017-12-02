@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Archivo del backup del servidor
 # Recogemos la informacion necesaria para el perfil del servicio
@@ -24,5 +24,5 @@ IFS=$'\n'
 IFS=$oldIFS
 # Se crea directorio para backup
 echo 'BACKUP SERVIDOR: Creando directorio de backup en $DIR.....'
-mkdir -p $DIR
+mkdir -p `cat $1`
 echo 'BACKUP SERVIDOR: Finalizada configuracion.'
