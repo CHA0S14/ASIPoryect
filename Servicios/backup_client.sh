@@ -28,6 +28,14 @@ then
     exit 1
 fi
 
+#comprobamos si la ip corresponde a una maquina
+ping -c 1 $servidor > /dev/null 2> /dev/null
+if [ $? -ne 0 ] 
+then
+    echo "BACKUP CLIENTE: La ip del servidor no corresponde con una maquina valida"
+    exit 1
+fi
+
 #comprobamos la existencia de la carpeta de destino
 ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$servidor test -d $para > /dev/null 2> /dev/null
 if [ $? -ne 0 ] 
