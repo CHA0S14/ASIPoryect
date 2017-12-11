@@ -13,7 +13,7 @@ scripts="mount.sh raid.sh lvm.sh snis.sh cnis.sh snfs.sh cnfs.sh backup_client.s
 for fich in $scripts; do
 	if [ ! -f "./Servicios/$fich" ]
 	then
-		echo "CLUSTER: El fichero ./config/$fich no esta disponible. Abortando ejecución."
+		echo "CLUSTER: El fichero ./Servicios/$fich no esta disponible. Abortando ejecución."
 		exit 1
 	fi
 done
