@@ -13,7 +13,7 @@ scripts="mount.sh raid.sh lvm.sh snis.sh cnis.sh snfs.sh cnfs.sh backup_client.s
 for fich in $scripts; do
 	if [ ! -f "./Servicios/$fich" ]
 	then
-		echo "CLUSTER: El fichero ./config/$fich no esta disponible. Abortando ejecución."
+		echo "CLUSTER: El fichero ./Servicios/$fich no esta disponible. Abortando ejecución."
 		exit 1
 	fi
 done
@@ -71,18 +71,18 @@ function tratarComando {
 	echo "CLUSTER: Fichero de perfil de configuración: $4"
 	echo 'CLUSTER: Preparando archivos...'
 	#Creamos la carpeta del proyecto
-	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 'mkdir ~/ASI2014/' > /dev/null 2>&1 || { 
+	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 'mkdir ~/ASI/' > /dev/null 2>&1 || { 
 		echo "CLUSTER: No es posible establecer conexion con la máquina. Abortando..."
 		exit 1
 		}
 	#Copiamos los archivos necesarios
-	scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null $4 root@$2:~/ASI2014/config.cfg > /dev/null 2>&1
-	scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null $SCRIPT root@$2:~/ASI2014/servicio > /dev/null 2>&1
+	scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null $4 root@$2:~/ASI/config.cfg > /dev/null 2>&1
+	scp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null $SCRIPT root@$2:~/ASI/servicio > /dev/null 2>&1
 	#Ejecutamos el servicio
-	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 "chmod +x ~/ASI2014/servicio" > /dev/null 2>&1
-	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 "~/ASI2014/servicio ~/ASI2014/config.cfg" 2>&1
+	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 "chmod +x ~/ASI/servicio" > /dev/null 2>&1
+	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 "~/ASI/servicio ~/ASI/config.cfg" 2>&1
 	#Eliminamos los ficheros de configuración temporales utilizados
-	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 'rm -r ~/ASI2014/' > /dev/null 2>&1
+	ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@$2 'rm -r ~/ASI/' > /dev/null 2>&1
 }
 
 #Comprobamos que existe el fichero de configuracion
