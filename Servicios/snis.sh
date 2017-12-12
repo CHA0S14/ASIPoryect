@@ -31,7 +31,7 @@ done
 SERVIDOR=`hostname`
 IFS=$oldIFS
 #Actualizamos los paquetes
-apt-get -y update &> /dev/null && echo "SNIS: Actualizamos los paquetes" || echo "SNIS: Error al actualizar paquetes"
+apt-get -y update &> /dev/null && echo "SNIS: Paquetes actualizados" || echo "SNIS: Error al actualizar paquetes"
 export DEBIAN_FRONTEND=noninteractive
 #Instalamos NIS
 echo "SNIS: Instalando NIS"
