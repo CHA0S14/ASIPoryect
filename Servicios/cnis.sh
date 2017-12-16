@@ -33,12 +33,20 @@ for command in $(cat $1); do
 done
 IFS=$oldIFS
 
+ping -c 1 $SERVIDOR &> /dev/null
+if [ $? -ne 0 ]
+then
+	echo "CNIS: La ip no es valida"
+	exit 1
+fi
+
 #Actualizamos los paquetes
+echo "CNIS: Actualizando paquetes"
 apt-get -y update &> /dev/null && echo "CNIS: Paquetes actualizados" || echo "CNIS: Error al actualizar paquetes"
 export DEBIAN_FRONTEND=noninteractive
 #Instalamos NIS
 echo "CNIS: Instalando NIS"
-apt-get -y install nis --no-install-recommends &> /dev/null || echo "CNIS: Error al instalar NIS"
+apt-get -y install nis --no-install-recommends &> /dev/null && echo "CNIS: NIS instalado" || echo "CNIS: Error al instalar NIS"
 echo "CNIS: Configurando cliente NIS"
 #Añadimos el dominio al archivo
 echo $DOMINIO > /etc/defaultdomain
